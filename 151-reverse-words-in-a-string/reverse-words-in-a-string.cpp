@@ -14,9 +14,9 @@ public:
                     i++;
                 }
                 while(start < s.size() && s[start]==' ') start++;
-                 if(start == s.size()) break;
+                // if(start == s.size()) break;
             }
-             temp=temp+s[start];
+            if(start<s.size()) temp=temp+s[start];
              start++;
              
         }
