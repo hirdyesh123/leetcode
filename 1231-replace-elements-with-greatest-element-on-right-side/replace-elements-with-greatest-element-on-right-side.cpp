@@ -1,14 +1,14 @@
 class Solution {
 public:
-    vector<int> replaceElements(vector<int>&nums ) {
-        vector<int>ans;
-        for(int i=0;i<nums.size();i++){
-            int maxe=-1;
-            for(int j=i+1;j<nums.size();j++){
-                maxe=max(maxe,nums[j]);
-            }
-            ans.push_back(maxe);
+    vector<int> replaceElements(vector<int>& nums) {
+       // if(nums.size()==1) return {-1};
+        int maxe=nums[nums.size()-1];
+        nums[nums.size()-1]=-1;
+        for(int i=nums.size()-2;i>=0;i--){
+            int temp=nums[i];
+            nums[i]=max(nums[i+1],maxe);
+            maxe=max(maxe,temp);
         }
-        return ans;
+        return nums;
     }
 };
