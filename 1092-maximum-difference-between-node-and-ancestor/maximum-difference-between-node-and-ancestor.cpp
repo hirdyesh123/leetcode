@@ -12,24 +12,19 @@
 class Solution {
 public:
     int ans=0;
-    void helper(TreeNode* root,int maxanc){
+    void helper(TreeNode* root,int maxanc,int minanc){
         if(root==NULL) return;
         ans=max(ans,abs(root->val-maxanc));
-        helper(root->left,max(root->val,maxanc));
-        helper(root->right,max(root->val,maxanc));
-    }
-    void helper2(TreeNode* root,int minanc){
-        if(root==NULL) return;
         ans=max(ans,abs(root->val-minanc));
-        helper2(root->left,min(root->val,minanc));
-        helper2(root->right,min(root->val,minanc));
+        helper(root->left,max(root->val,maxanc),min(root->val,minanc));
+        helper(root->right,max(root->val,maxanc),min(root->val,minanc));
     }
+   
     int maxAncestorDiff(TreeNode* root) {
         if(root==NULL) return 0;
-        helper(root->left,root->val);
-        helper(root->right,root->val);
-        helper2(root->left,root->val);
-        helper2(root->right,root->val);
+        helper(root->left,root->val,root->val);
+        helper(root->right,root->val,root->val);
+    
         return ans;
     }
 };
